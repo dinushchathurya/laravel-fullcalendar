@@ -21,7 +21,7 @@ class EventController extends Controller
         return view('welcome');
     }
 
-     public function eventManage(Request $request)
+    public function eventManage(Request $request)
     {
  
         switch ($request->type) {
