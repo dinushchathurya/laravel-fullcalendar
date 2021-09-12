@@ -7,21 +7,22 @@ use App\Models\Event;
 
 class EventController extends Controller
 {
-    public function index()
-    {   
+    public function index(Request $request)
+    {
+  
         if($request->ajax()) {
        
-            $data = Event::whereDate('start', '>=', $request->start)
-                    ->whereDate('end',   '<=', $request->end)
-                    ->get(['id', 'title', 'start', 'end']);
-
-            return response()->json($data);
+             $data = Event::whereDate('start', '>=', $request->start)
+                       ->whereDate('end',   '<=', $request->end)
+                       ->get(['id', 'title', 'start', 'end']);
+  
+             return response()->json($data);
         }
-
+  
         return view('welcome');
     }
-
-    public function eventManage(Request $request)
+ 
+    public function manageEvent(Request $request)
     {
  
         switch ($request->type) {
@@ -52,6 +53,7 @@ class EventController extends Controller
                 break;
                 
             default:
+                
                 break;
         }
     }
