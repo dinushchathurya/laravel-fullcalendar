@@ -17,7 +17,42 @@ class EventController extends Controller
 
             return response()->json($data);
         }
-        
+
         return view('welcome');
+    }
+
+     public function eventManage(Request $request)
+    {
+ 
+        switch ($request->type) {
+            case 'add':
+                $event = Event::create([
+                    'title' => $request->title,
+                    'start' => $request->start,
+                    'end' => $request->end,
+                ]);
+    
+                return response()->json($event);
+                break;
+    
+            case 'update':
+                $event = Event::find($request->id)->update([
+                    'title' => $request->title,
+                    'start' => $request->start,
+                    'end' => $request->end,
+                ]);
+    
+                return response()->json($event);
+                break;
+    
+            case 'delete':
+                $event = Event::find($request->id)->delete();
+    
+                return response()->json($event);
+                break;
+                
+            default:
+                break;
+        }
     }
 }
